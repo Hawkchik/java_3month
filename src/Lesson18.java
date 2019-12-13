@@ -46,6 +46,7 @@ public class Lesson18 {
                     if (o1.bank.equals("Sber")) result = -1;
                     if (o1.bank.equals("Alpha")) result = 1;
                     else if (o1.bank.equals("Vtb")) result = 2;
+                    else result=0;
                 }
                 return result;
 
