@@ -2,12 +2,34 @@ import java.util.*;
 
 public class Lesson18 {
     public static void main(String[] args) {
+        System.out.println("Введите строку");
+        Scanner scanner = new Scanner(System.in);
+        String b = scanner.nextLine();
+        Map<String, Integer> words = new TreeMap<>();
+        int v = 1;
+        for (String c : b.split(" ")) {
+            words.put(c, v++);
+        }
+
+        System.out.println(words);
+
+        Map.Entry<String, Integer> maxEntry = null;
+        for (Map.Entry<String, Integer> entry : words.entrySet()) {
+            // если максимум не определен или очередное значение ещё больше
+            if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+                maxEntry = entry; // то присваем максимуму новое значение
+            }
+        }
+        System.out.println("Всего слов в строке " + maxEntry.getValue());
+
+
+
         /*Map <String, String> products = new LinkedHashMap<>();
         products.put("Антон", "Proger");
         products.put("Ivan", "QA Engineer");
         products.put("Dmitriy", "Business-man");
 
-       Set a= products.entrySet();
+        Set a= products.entrySet();
 
         for (Map.Entry<String,String> pair: products.entrySet()){
             System.out.println(pair.getKey()+ " works " + pair.getValue());
@@ -29,36 +51,5 @@ public class Lesson18 {
 
         System.out.println(map);*/
 
-        Comparator<Order> myComparat = new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                int result = 0;
-                if (o1.amount.compareTo(o2.amount) > 0) result = 1;
-                if (o1.amount.compareTo(o2.amount) < 0) result = -1;
-                else result = 0;
-
-                if (result == 0) {
-                    if (o1.name.compareTo(o2.name) < 0) result = -1;
-                    if (o1.name.compareTo(o2.name) > 0) result = 1;
-                    else result = 0;
-                }
-                if (result == 0) {
-                    if (o1.bank.equals("Sber")) result = 1;
-                    if (o1.bank.equals("Alpha")) result = 2;
-                    else if (o1.bank.equals("Vtb")) result = 3;
-                    else result=0;
-                }
-                return result;
-
-            }
-        };
-        SortedSet<Order> mySet = new TreeSet<>(myComparat);
-        mySet.add(new Order("Test", "Sber", 4000));
-        mySet.add(new Order("Sergey", "Sber", 500));
-        mySet.add(new Order("Test", "Alpha", 4000));
-        mySet.add(new Order("Test", "Vtb", 4000));
-        mySet.add(new Order("Ivan", "Vtb", 1000));
-
-        System.out.println(mySet);
     }
 }
