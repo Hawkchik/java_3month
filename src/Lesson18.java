@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Lesson18 {
     public static void main(String[] args) {
-        System.out.println("Введите строку");
+        System.out.println("Введите предложение");
         Scanner scanner = new Scanner(System.in);
         String b = scanner.nextLine();
         Map<String, Integer> words = new TreeMap<>();
