@@ -2,9 +2,17 @@ import java.math.BigDecimal;
 
 public class Transactions {
     Integer price;
-    String type;
+    Integer queue;
     Integer count;
 
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     public Integer getPrice() {
         return price;
@@ -14,23 +22,23 @@ public class Transactions {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public Integer getQueue() {
+        return queue;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setQueue(String type) {
+        this.queue = queue;
     }
 
-    public Transactions(Integer price, String type, Integer count) {
+    public Transactions(Integer price, Integer queue, Integer count) {
         this.price = price;
-        this.type = type;
+        this.queue = queue;
         this.count = count;
     }
 
     @Override
     public String toString() {
-        return   price + " "+ type  +
-                " " + count;
+        return "Цена: " + price + " Очередь: "+ queue  +
+                " Количество: " + count;
     }
 }

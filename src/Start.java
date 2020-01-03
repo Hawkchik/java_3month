@@ -13,21 +13,35 @@ public class Start {
         Operations operations = new Operations();
 
 
-        Transactions transactions = new Transactions(10,"buy",2);
-        Transactions transactions2 = new Transactions(12,"buy",2);
-        Transactions transactions3 = new Transactions(11,"buy",2);
+        Transactions transactions = new Transactions(12,0,1);
+        Transactions transactions2 = new Transactions(30,1,3);
+        Transactions transactions3 = new Transactions(40,2,4);
+        Transactions transactions4 = new Transactions(50,1,3);
+        Transactions transactions5 = new Transactions(50,2,1);
         operations.buy(transactions);
+        //operations.removeBuy(transactions);
         operations.buy(transactions2);
-        operations.buy(transactions3);
-        operations.sell(transactions);
-        operations.sell(transactions2);
-        operations.sell(transactions3);
+        //operations.buy(transactions3);
+        //operations.removeBuy(transactions2);
+        System.out.println("Покупка очередь "+operations.queuebuy);
+        System.out.println("продажа очередь "+ operations.queuesell);
+
+        operations.sell(transactions4);
+        //operations.removeSell(transactions4);
+        operations.sell(transactions5);
+        //operations.removeSell(transactions5);
+
+
+        System.out.println("Покупка очередь "+operations.queuebuy);
+        System.out.println("продажа очередь "+ operations.queuesell);
+
+        //operations.sell(transactions3);
        // operations.buy(transactions2);
         //operations.buy(transactions);
 
        // operations.checkerbuy(transactions2.price,transactions2.type);
-        System.out.println(operations.queuebuy);
-        System.out.println(operations.queuesell);
+        System.out.println("Покупка очередь "+operations.queuebuy);
+        System.out.println("продажа очередь "+ operations.queuesell);
 
     }
 }
