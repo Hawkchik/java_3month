@@ -45,7 +45,7 @@ public class Operations {
 
     // метод продажи
     public boolean sell(Transactions transactions) {
-        if (checkerSell()&&checkerBuy() && transactions.price < queuesell.getFirst().price) {
+        if (checkerSell() && checkerBuy() && transactions.price < queuesell.getFirst().price) {
 
             queuesell.addFirst(transactions);
         } else queuesell.addLast(transactions);
@@ -56,10 +56,9 @@ public class Operations {
     // метод покупки
     public boolean buy(Transactions transactions) {
 
-        if (checkerBuy() && checkerSell()&& transactions.price > queuebuy.getFirst().price) {
+        if (checkerBuy() && checkerSell() && transactions.price > queuebuy.getFirst().price) {
             queuebuy.addFirst(transactions);
-        }
-        queuebuy.addLast(transactions);
+        } else queuebuy.addLast(transactions);
         Collections.sort((LinkedList) queuebuy, new ComparatorQueueBuy());
         return true;
     }
@@ -67,7 +66,7 @@ public class Operations {
     // проверка на пустоту
     public boolean checkerSell() {
         boolean a = true;
-        if ( queuebuy.isEmpty()) {
+        if (queuesell.isEmpty()) {
             a = false;
         }
         return a;
@@ -76,27 +75,27 @@ public class Operations {
     // проверка на пустоту
     public boolean checkerBuy() {
         boolean a = true;
-        if ( queuesell.isEmpty()) {
+        if (queuebuy.isEmpty()) {
             a = false;
         }
         return a;
     }
 
     // метод удаления продажи
-    public void removeSell(Transactions transactions) {
-        Integer a = 0;
-        Integer b = 0;
-        if (queuesell.getFirst().price <= transactions.price&&checkerSell()) {
-            a = queuebuy.getFirst().count - transactions.count;
-            queuesell.removeFirst();
-            if (a <= 0) {
+    public void removeSell() {
+        int a = 0;
+        while (checkerBuy() && checkerSell() && queuebuy.getFirst().price >= queuebuy.getFirst().price) {
+            a = queuebuy.getFirst().count - queuesell.getFirst().count;
+            if (a == 0) {
                 queuebuy.removeFirst();
-            }
-            if (checkerSell()) {
+                queuesell.removeFirst();
+            } else if (a < 0) {
+                queuebuy.removeFirst();
+                queuesell.getFirst().setCount(Math.abs(a));
+            } else if (checkerSell()) {
                 assert queuebuy.peekFirst() != null;
-                b = queuebuy.peekFirst().getCount();
-                assert queuebuy.peekFirst() != null;
-                queuebuy.peekFirst().setCount(b + a);
+                queuebuy.peekFirst().setCount(a);
+                queuesell.removeFirst();
 
             }
         }
@@ -105,20 +104,20 @@ public class Operations {
     }
 
     // метод удаления покупки
-    public void removeBuy(Transactions transactions) {
-        Integer a = 0;
-        Integer b = 0;
-        if (queuebuy.getFirst().price >= transactions.price&&checkerBuy()) {
-            a = queuebuy.getFirst().count - transactions.count;
-            queuesell.removeFirst();
-            if (a <= 0) {
+    public void removeBuy() {
+        int a = 0;
+        while (checkerSell() && checkerBuy() && queuesell.getFirst().price <= queuebuy.getFirst().price) {
+            a = queuesell.getFirst().count - queuebuy.getFirst().count;
+            if (a == 0) {
                 queuebuy.removeFirst();
-            }
-            if (checkerBuy()) {
-                assert queuebuy.peekFirst() != null;
-                b = queuebuy.peekFirst().getCount();
-                assert queuebuy.peekFirst() != null;
-                queuebuy.peekFirst().setCount(b + a);
+                queuesell.removeFirst();
+            } else if (a < 0) {
+                queuesell.removeFirst();
+                queuebuy.getFirst().setCount(Math.abs(a));
+            } else if (checkerSell()) {
+                assert queuesell.peekFirst() != null;
+                queuesell.peekFirst().setCount(a);
+                queuebuy.removeFirst();
 
             }
         }
@@ -128,9 +127,6 @@ public class Operations {
     // Переопределение метода отрисовки
     @Override
     public String toString() {
-        return "Operations{" +
-                "queuesell=" + queuesell +
-                ", queuebuy=" + queuebuy +
-                '}';
+        return queuebuy + " " + queuesell;
     }
 }
