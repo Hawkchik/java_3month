@@ -9,16 +9,16 @@ public class Start {
         Investor Anton = new Investor("Anton", 125000);
         Investor Danila = new Investor("Danila", 225000);
 
-       // System.out.println("Выберите имя");
+        // System.out.println("Выберите имя");
 
         Operations operations = new Operations();
 
 
-        Transactions transactions = new Transactions(12,0,1);
-        Transactions transactions2 = new Transactions(30,1,3);
-        Transactions transactions3 = new Transactions(40,2,4);
-        Transactions transactions4 = new Transactions(50,3,3);
-        Transactions transactions5 = new Transactions(60,4,5);
+        Transactions transactions = new Transactions(12, 0, 1);
+        Transactions transactions2 = new Transactions(30, 1, 3);
+        Transactions transactions3 = new Transactions(40, 2, 4);
+        Transactions transactions4 = new Transactions(50, 3, 3);
+        Transactions transactions5 = new Transactions(60, 4, 3);
 
         operations.sell(transactions);
         operations.removeSell();
@@ -26,29 +26,29 @@ public class Start {
         operations.removeSell();
         operations.sell(transactions3);
         operations.removeSell();
-        System.out.println("Покупка "+operations.queuebuy);
-        System.out.println("Продажа "+ operations.queuesell);
+        System.out.println("Покупка " + operations.queuebuy);
+        System.out.println("Продажа " + operations.queuesell);
 
         operations.sell(transactions4);
         operations.removeSell();
         operations.buy(transactions5);
-        System.out.println("Покупка "+operations.queuebuy);
-        System.out.println("Продажа "+ operations.queuesell);
-        operations.removeBuy();
+        System.out.println("Покупка " + operations.queuebuy);
+        System.out.println("Продажа " + operations.queuesell);
+        System.out.println("Количество потраченных денег: " + operations.removeBuy());
         //operations.sell(transactions4);
         //operations.removeSell(transactions5);
 
 
-        System.out.println("Покупка "+operations.queuebuy);
-        System.out.println("Продажа "+ operations.queuesell);
+        System.out.println("Покупка " + operations.queuebuy);
+        System.out.println("Продажа " + operations.queuesell);
 
         //operations.sell(transactions3);
-       // operations.buy(transactions2);
+        // operations.buy(transactions2);
         //operations.buy(transactions);
 
-       // operations.checkerbuy(transactions2.price,transactions2.type);
-       // System.out.println("Покупка "+operations.queuebuy);
-       // System.out.println("Продажа "+ operations.queuesell);
+        // operations.checkerbuy(transactions2.price,transactions2.type);
+        // System.out.println("Покупка "+operations.queuebuy);
+        // System.out.println("Продажа "+ operations.queuesell);
 
     }
 }

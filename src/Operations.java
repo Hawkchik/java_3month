@@ -83,18 +83,22 @@ public class Operations {
 
     // метод удаления продажи
     public void removeSell() {
-        int a = 0;
+        int a = 0; // Переменная для подсчёта количества акций
+        int b = 0;  // переменная для количества денег
         while (checkerBuy() && checkerSell() && queuebuy.getFirst().price >= queuebuy.getFirst().price) {
             a = queuebuy.getFirst().count - queuesell.getFirst().count;
             if (a == 0) {
                 queuebuy.removeFirst();
+                b = queuebuy.getFirst().getCount() * queuebuy.getFirst().getPrice();
                 queuesell.removeFirst();
             } else if (a < 0) {
+                b += queuebuy.getFirst().getCount() * queuebuy.getFirst().getPrice();
                 queuebuy.removeFirst();
                 queuesell.getFirst().setCount(Math.abs(a));
             } else if (checkerSell()) {
                 assert queuebuy.peekFirst() != null;
                 queuebuy.peekFirst().setCount(a);
+                b += a * queuebuy.peekFirst().getPrice();
                 queuesell.removeFirst();
 
             }
@@ -104,23 +108,28 @@ public class Operations {
     }
 
     // метод удаления покупки
-    public void removeBuy() {
-        int a = 0;
+    public int removeBuy() {
+        int a = 0; // Переменная для подсчёта количества акций
+        int b = 0;  // переменная для количества денег
         while (checkerSell() && checkerBuy() && queuesell.getFirst().price <= queuebuy.getFirst().price) {
             a = queuesell.getFirst().count - queuebuy.getFirst().count;
             if (a == 0) {
                 queuebuy.removeFirst();
+                b = queuesell.getFirst().getCount() * queuesell.getFirst().getPrice();
                 queuesell.removeFirst();
             } else if (a < 0) {
+                b += queuesell.getFirst().getCount() * queuesell.getFirst().getPrice();
                 queuesell.removeFirst();
                 queuebuy.getFirst().setCount(Math.abs(a));
             } else if (checkerSell()) {
                 assert queuesell.peekFirst() != null;
                 queuesell.peekFirst().setCount(a);
+                b += a * queuesell.peekFirst().getPrice();
                 queuebuy.removeFirst();
 
             }
         }
+        return b;
 
     }
 

@@ -38,7 +38,7 @@ public class Transactions {
 
     @Override
     public String toString() {
-        return "Цена: " + price + " Очередь: "+ queue  +
+        return "Цена: " + price + " Очередь: " + queue +
                 " Количество: " + count;
     }
 }
