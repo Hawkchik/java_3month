@@ -82,7 +82,7 @@ public class Operations {
     }
 
     // метод удаления продажи
-    public void removeSell() {
+    public int removeSell() {
         int a = 0; // Переменная для подсчёта количества акций
         int b = 0;  // переменная для количества денег
         while (checkerBuy() && checkerSell() && queuebuy.getFirst().price >= queuebuy.getFirst().price) {
@@ -104,7 +104,7 @@ public class Operations {
             }
         }
 
-
+        return b;
     }
 
     // метод удаления покупки
@@ -140,12 +140,11 @@ public class Operations {
     }
 
 
-
     // Метод проверки стринги на число
 
-    public boolean number (String number) {
+    public boolean number(String number) {
         boolean numeric = true;
-        numeric=number.matches("-?\\d+(\\.\\d+)?");
+        numeric = number.matches("-?\\d+(\\.\\d+)?");
         if (numeric) return true;
         else return false;
 
