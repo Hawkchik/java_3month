@@ -15,7 +15,7 @@ public class Start {
         Investor Dmitriy = new Investor("Dmitriy", 250000);
         Investor Anton = new Investor("Anton", 125000);
         Investor Danila = new Investor("Danila", 225000);
-        System.out.println("Выберите Инвестора"+"\n" + "1. Erik" + "\n"+ "2. Ivan" + "\n"+ "3. Dmitriy" + "\n" + "4. Anton" + "\n" + "5. Danila");
+        System.out.println("Выберите Инвестора" + "\n" + "1. Erik" + "\n" + "2. Ivan" + "\n" + "3. Dmitriy" + "\n" + "4. Anton" + "\n" + "5. Danila");
         Scanner scanner = new Scanner(System.in);
         String investorenter = scanner.nextLine();
         int investor = 0;
@@ -23,25 +23,29 @@ public class Start {
         if (operations.number(investorenter)) {
             investor = Integer.parseInt(investorenter);
         } else {
-            System.out.println("Неправильная цена");
-            fw.write("Неправильная цена" + "\n");
+            System.out.println("Неправильный инвестор");
+            fw.write("Неправильный инвестор" + "\n");
         }
-        if (investor==1){
+        if (investor == 1) {
             capital = Erik.getAmount();
+            fw.write("Выбран Эрик" + "\n");
+        } else if (investor == 2) {
+            capital = Ivan.getAmount();
+            fw.write("Выбран Иван" + "\n");
+        } else if (investor == 3) {
+            capital = Dmitriy.getAmount();
+            fw.write("Выбран Дмитрий" + "\n");
+        } else if (investor == 4) {
+            capital = Anton.getAmount();
+            fw.write("Выбран Антон" + "\n");
+        } else if (investor == 5) {
+            capital = Danila.getAmount();
+            fw.write("Выбран Данила" + "\n");
         }
-        else if (investor==2){
-            capital=Ivan.getAmount();
+        else {
+            System.out.println("Неправильный инвестор");
+            fw.write("Неправильный инвестор" + "\n");
         }
-        else if (investor==3){
-            capital=Dmitriy.getAmount();
-        }
-        else if (investor==4){
-            capital=Anton.getAmount();
-        }
-        else if (investor==5){
-            capital=Danila.getAmount();
-        }
-
 
         Integer amount = 0;
         Integer moneyCash = 0;
@@ -50,7 +54,7 @@ public class Start {
         while (capital > (amount)) {
             System.out.println("Введите цену акции");
             String priceenter = scanner.nextLine();
-            fw.write("Введена цена: "+ priceenter+"\n");
+            fw.write("Введена цена: " + priceenter + "\n");
             int price = 0;
             if (operations.number(priceenter)) {
                 price = Integer.parseInt(priceenter);
@@ -61,35 +65,35 @@ public class Start {
             }
             System.out.println("Введите количество акций");
             String countenter = scanner.nextLine();
-            fw.write("Введено кол-во акций: "+ countenter+"\n");
+            fw.write("Введено кол-во акций: " + countenter + "\n");
             int count = 0;
             if (operations.number(countenter)) {
                 count = Integer.parseInt(countenter);
             } else {
                 System.out.println("Неправильная цена");
-                fw.write("Неправильная цена"+"\n");
+                fw.write("Неправильная цена" + "\n");
                 break;
             }
             System.out.println("1 - Купить" + "\n" + "2 - Продать");
             String typeenter = scanner.nextLine();
             int type = 0;
-            fw.write("Выбран тип "+ typeenter+"\n");
+            fw.write("Выбран тип " + typeenter + "\n");
             if (operations.number(typeenter)) {
                 type = Integer.parseInt(typeenter);
             } else {
                 System.out.println("Неправильная цена");
-                fw.write("Неправильная цена"+"\n");
+                fw.write("Неправильная цена" + "\n");
                 break;
             }
             Transactions transactions = new Transactions(price, i++, count);
             if (type == 1) {
                 operations.buy(transactions);
-                int a=operations.removeBuy();
-                fw.write("Количество потраченных денег "+ a);
+                int a = operations.removeBuy();
+                fw.write("Количество потраченных денег " + a);
             } else if (type == 2) {
                 operations.sell(transactions);
-                int b=operations.removeSell();
-                fw.write("Количество потраченных денег "+ b);
+                int b = operations.removeSell();
+                fw.write("Количество потраченных денег " + b);
             } else {
                 System.out.println("Неправильный выбор");
                 fw.write("Неправильный выбор");
@@ -125,7 +129,6 @@ public class Start {
 
 
         System.out.println("Количество потраченных денег: " + operations.removeBuy());
-
 
 
     }
