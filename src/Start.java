@@ -1,6 +1,8 @@
 import java.math.BigDecimal;
 import java.util.Formatter;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Start {
     public static void main(String[] args) {
@@ -15,24 +17,61 @@ public class Start {
         Scanner scanner = new Scanner(System.in);
         Integer amount = 0;
         Integer moneyCash = 0;
+        Integer i = 0; // счетчик очереди
         while (capital > (amount)) {
-            System.out.println("Введите цену");
-            int Price = scanner.nextInt();
+            System.out.println("Введите цену акции");
+            String priceenter = scanner.nextLine();
+            int price = 0;
+            if (operations.number(priceenter)) {
+                price = Integer.parseInt(priceenter);
+            } else {
+                System.out.println("Неправильная цена");
+                break;
+            }
             System.out.println("Введите количество акций");
-            int Count = scanner.nextInt();
-            moneyCash = capital - amount;
-            amount += Price * Count;
+            String countenter = scanner.nextLine();
+            int count = 0;
+            if (operations.number(countenter)) {
+                count = Integer.parseInt(countenter);
+            } else {
+                System.out.println("Неправильная цена");
+                break;
+            }
+            System.out.println("1 - Купить" + "\n" + "2 - Продать");
+            String typeenter = scanner.nextLine();
+            int type = 0;
+            if (operations.number(typeenter)) {
+                type = Integer.parseInt(typeenter);
+            } else {
+                System.out.println("Неправильная цена");
+                break;
+            }
+            Transactions transactions = new Transactions(price, i++, count);
+            if (type == 1) {
+                operations.buy(transactions);
+                operations.removeBuy();
+            } else if (type == 2) {
+                operations.sell(transactions);
+                operations.removeSell();
+            } else {
+                System.out.println("Неправильный выбор");
+            }
 
+            moneyCash = capital - amount;
+            amount += price * count;
+            System.out.println("Покупка " + operations.queuebuy);
+            System.out.println("Продажа " + operations.queuesell);
             if (amount > capital) {
                 System.out.println("Слишком большая сумма");
                 System.out.println(moneyCash);
-                amount -= Price * Count;
+                amount -= price * count;
             }
             if (capital == amount) {
+                System.out.println("Увы закончились деньги...");
                 break;
             }
         }
-        System.out.println("Увы закончились деньги...");
+
 /*
 
         Transactions transactions = new Transactions(12, 0, 1);
@@ -52,12 +91,6 @@ public class Start {
         //operations.removeSell(transactions5);
 
 
-        System.out.println("Покупка " + operations.queuebuy);
-        System.out.println("Продажа " + operations.queuesell);
-
-
-        // System.out.println("Покупка "+operations.queuebuy);
-        // System.out.println("Продажа "+ operations.queuesell);
-
     }
+
 }

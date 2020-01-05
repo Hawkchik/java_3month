@@ -138,4 +138,16 @@ public class Operations {
     public String toString() {
         return queuebuy + " " + queuesell;
     }
+
+
+
+    // Метод проверки стринги на число
+
+    public boolean number (String number) {
+        boolean numeric = true;
+        numeric=number.matches("-?\\d+(\\.\\d+)?");
+        if (numeric) return true;
+        else return false;
+
+    }
 }
