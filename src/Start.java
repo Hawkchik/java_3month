@@ -8,19 +8,45 @@ import java.util.regex.Pattern;
 
 public class Start {
     public static void main(String[] args) throws IOException {
+        FileWriter fw = new FileWriter("Log.txt");
+        Operations operations = new Operations();
         Investor Erik = new Investor("Erik", 500000);
         Investor Ivan = new Investor("Ivan", 1000000);
         Investor Dmitriy = new Investor("Dmitriy", 250000);
         Investor Anton = new Investor("Anton", 125000);
         Investor Danila = new Investor("Danila", 225000);
-        // System.out.println("Выберите имя");
-        Integer capital = Erik.getAmount();
-        Operations operations = new Operations();
+        System.out.println("Выберите Инвестора"+"\n" + "1. Erik" + "\n"+ "2. Ivan" + "\n"+ "3. Dmitriy" + "\n" + "4. Anton" + "\n" + "5. Danila");
         Scanner scanner = new Scanner(System.in);
+        String investorenter = scanner.nextLine();
+        int investor = 0;
+        Integer capital = 0;
+        if (operations.number(investorenter)) {
+            investor = Integer.parseInt(investorenter);
+        } else {
+            System.out.println("Неправильная цена");
+            fw.write("Неправильная цена" + "\n");
+        }
+        if (investor==1){
+            capital = Erik.getAmount();
+        }
+        else if (investor==2){
+            capital=Ivan.getAmount();
+        }
+        else if (investor==3){
+            capital=Dmitriy.getAmount();
+        }
+        else if (investor==4){
+            capital=Anton.getAmount();
+        }
+        else if (investor==5){
+            capital=Danila.getAmount();
+        }
+
+
         Integer amount = 0;
         Integer moneyCash = 0;
         Integer i = 0; // счетчик очереди
-        FileWriter fw = new FileWriter("Log.txt");
+
         while (capital > (amount)) {
             System.out.println("Введите цену акции");
             String priceenter = scanner.nextLine();
