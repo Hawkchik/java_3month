@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Start {
@@ -19,20 +20,20 @@ public class Start {
             Transactions transactions1 = new Transactions(price, k++, count);
             if (params[2].equals("buy")) {
                 operations.buy(transactions1);
-                fw.write("Создана транзакция с параметрами: " + "Цена: "+ price + "Количество акций "+ count);
-                int a =operations.removeBuy();
+                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count);
+                int a = operations.removeBuy();
                 fw.write("Количество потраченных денег " + a);
             } else if (params[2].equals("sell")) {
                 operations.sell(transactions1);
-                fw.write("Создана транзакция с параметрами: " + "Цена: "+ price + "Количество акций "+ count);
-                int b =operations.removeSell();
+                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count);
+                int b = operations.removeSell();
                 fw.write("Количество потраченных денег " + b);
 
             }
         }
         fr.close();
-        System.out.println("Покупка " + operations.queuebuy);
-        System.out.println("Продажа " + operations.queuesell);
+        operations.paintGlassBuy((LinkedList) operations.queuebuy);
+        operations.paintGlassSell((LinkedList) operations.queuesell);
 
         Investor Erik = new Investor("Erik", 500000);
         Investor Ivan = new Investor("Ivan", 1000000);
@@ -124,8 +125,8 @@ public class Start {
 
             moneyCash = capital - amount;
             amount += price * count;
-            System.out.println("Покупка " + operations.queuebuy);
-            System.out.println("Продажа " + operations.queuesell);
+            operations.paintGlassBuy((LinkedList) operations.queuebuy);
+            operations.paintGlassSell((LinkedList) operations.queuesell);
             if (amount > capital) {
                 System.out.println("Слишком большая сумма");
                 System.out.println(moneyCash);
@@ -137,18 +138,10 @@ public class Start {
             }
         }
 
-/*
-
-        Transactions transactions = new Transactions(12, 0, 1);
-        Transactions transactions2 = new Transactions(30, 1, 3);
-        Transactions transactions3 = new Transactions(40, 2, 4);
-        Transactions transactions4 = new Transactions(50, 3, 3);
-        Transactions transactions5 = new Transactions(60, 4, 3);
-*/
         fw.close();
 
-        System.out.println("Покупка " + operations.queuebuy);
-        System.out.println("Продажа " + operations.queuesell);
+        operations.paintGlassBuy((LinkedList) operations.queuebuy);
+        operations.paintGlassSell((LinkedList) operations.queuesell);
 
 
         System.out.println("Количество потраченных денег: " + operations.removeBuy());

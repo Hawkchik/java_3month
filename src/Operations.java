@@ -149,4 +149,19 @@ public class Operations {
         else return false;
 
     }
+    // Метод отображения стакана котировок
+
+    public void paintGlassBuy(LinkedList linkedList) {
+        System.out.println("Покупка" + " Цена " + " Количество");
+        for (int i = 0; i < linkedList.size(); i++) {
+            System.out.println(linkedList.get(i));
+        }
+    }
+
+    public void paintGlassSell(LinkedList linkedList) {
+        System.out.println("Продажа");
+        for (int i = 0; i < linkedList.size(); i++) {
+            System.out.println(linkedList.get(i));
+        }
+    }
 }
