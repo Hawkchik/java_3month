@@ -1,21 +1,40 @@
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Formatter;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Start {
     public static void main(String[] args) throws IOException {
         FileWriter fw = new FileWriter("Log.txt");
+        FileReader fr = new FileReader("Transactions.txt");
         Operations operations = new Operations();
+        Scanner scanner2=new Scanner(fr);
+        int k=0;
+        while (scanner2.hasNextLine()){
+        String line1 = scanner2.nextLine();
+            String[] params = line1.split(" ");
+            int price = Integer.parseInt(params[0]);
+            int count = Integer.parseInt(params[1]);
+            Transactions transactions1 = new Transactions(price,k++,count);
+                    if (params[2].equals("buy")){
+                        operations.buy(transactions1);
+                        operations.removeBuy();
+                    }
+                    else if (params[2].equals("sell")){
+                        operations.sell(transactions1);
+                        operations.removeSell();
+                    }
+        }
+        fr.close();
+        System.out.println("Покупка " + operations.queuebuy);
+        System.out.println("Продажа " + operations.queuesell);
+
         Investor Erik = new Investor("Erik", 500000);
         Investor Ivan = new Investor("Ivan", 1000000);
         Investor Dmitriy = new Investor("Dmitriy", 250000);
         Investor Anton = new Investor("Anton", 125000);
         Investor Danila = new Investor("Danila", 225000);
-        System.out.println("Выберите Инвестора" + "\n" + "1. Erik" + "\n" + "2. Ivan" + "\n" + "3. Dmitriy" + "\n" + "4. Anton" + "\n" + "5. Danila");
+        System.out.println("Выберите Инвестора(наберите число)" + "\n" + "1. Erik" + "\n" + "2. Ivan" + "\n" + "3. Dmitriy" + "\n" + "4. Anton" + "\n" + "5. Danila");
         Scanner scanner = new Scanner(System.in);
         String investorenter = scanner.nextLine();
         int investor = 0;

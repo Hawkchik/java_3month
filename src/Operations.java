@@ -85,7 +85,7 @@ public class Operations {
     public int removeSell() {
         int a = 0; // Переменная для подсчёта количества акций
         int b = 0;  // переменная для количества денег
-        while (checkerBuy() && checkerSell() && queuebuy.getFirst().price >= queuebuy.getFirst().price) {
+        while (checkerBuy() && checkerSell() && queuebuy.getFirst().price >= queuesell.getFirst().price) {
             a = queuebuy.getFirst().count - queuesell.getFirst().count;
             if (a == 0) {
                 queuebuy.removeFirst();
