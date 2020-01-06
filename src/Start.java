@@ -122,11 +122,12 @@ public class Start {
                 System.out.println("Неправильный выбор");
                 fw.write("Неправильный выбор");
             }
-
-            moneyCash = capital - amount;
             amount += price * count;
+            moneyCash = capital - amount;
+
             operations.paintGlassBuy((LinkedList) operations.queuebuy);
             operations.paintGlassSell((LinkedList) operations.queuesell);
+            System.out.println("Остаток денег= " + moneyCash);
             if (amount > capital) {
                 System.out.println("Слишком большая сумма");
                 System.out.println(moneyCash);
