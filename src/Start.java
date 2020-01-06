@@ -8,22 +8,27 @@ public class Start {
         FileWriter fw = new FileWriter("Log.txt");
         FileReader fr = new FileReader("Transactions.txt");
         Operations operations = new Operations();
-        Scanner scanner2=new Scanner(fr);
-        int k=0;
-        while (scanner2.hasNextLine()){
-        String line1 = scanner2.nextLine();
+        Scanner scanner2 = new Scanner(fr);
+        int k = 0;
+        fw.write("Загрузка из файла...");
+        while (scanner2.hasNextLine()) {
+            String line1 = scanner2.nextLine();
             String[] params = line1.split(" ");
             int price = Integer.parseInt(params[0]);
             int count = Integer.parseInt(params[1]);
-            Transactions transactions1 = new Transactions(price,k++,count);
-                    if (params[2].equals("buy")){
-                        operations.buy(transactions1);
-                        operations.removeBuy();
-                    }
-                    else if (params[2].equals("sell")){
-                        operations.sell(transactions1);
-                        operations.removeSell();
-                    }
+            Transactions transactions1 = new Transactions(price, k++, count);
+            if (params[2].equals("buy")) {
+                operations.buy(transactions1);
+                fw.write("Создана транзакция с параметрами: " + "Цена: "+ price + "Количество акций "+ count);
+                int a =operations.removeBuy();
+                fw.write("Количество потраченных денег " + a);
+            } else if (params[2].equals("sell")) {
+                operations.sell(transactions1);
+                fw.write("Создана транзакция с параметрами: " + "Цена: "+ price + "Количество акций "+ count);
+                int b =operations.removeSell();
+                fw.write("Количество потраченных денег " + b);
+
+            }
         }
         fr.close();
         System.out.println("Покупка " + operations.queuebuy);
@@ -60,8 +65,7 @@ public class Start {
         } else if (investor == 5) {
             capital = Danila.getAmount();
             fw.write("Выбран Данила" + "\n");
-        }
-        else {
+        } else {
             System.out.println("Неправильный инвестор");
             fw.write("Неправильный инвестор" + "\n");
         }
