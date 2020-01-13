@@ -11,12 +11,12 @@ public class Operations {
         @Override
         public int compare(Transactions t1, Transactions t2) {
             int result = 0;
-            if (t1.getPrice().compareTo(t2.getPrice()) > 0) result = -1;
+            if (t1.getPrice().compareTo(t2.getPrice()) > 0) result = 1;
             else result = 0;
 
             if (result == 0) {
 
-                if (t1.getQueue().compareTo(t2.getQueue()) > 0) result = 1;
+                if (t1.getQueue().compareTo(t2.getQueue()) > 0) result = -1;
                 else result = 0;
 
             }
@@ -30,12 +30,12 @@ public class Operations {
         public int compare(Transactions t1, Transactions t2) {
             int result = 0;
 
-            if (t1.getPrice().compareTo(t2.getPrice()) > 0) result = -1;
+            if (t1.getPrice().compareTo(t2.getPrice()) > 0) result = 1;
             else result = 0;
 
             if (result == 0) {
 
-                if (t1.getQueue().compareTo(t2.getQueue()) > 0) result = 1;
+                if (t1.getQueue().compareTo(t2.getQueue()) > 0) result = -1;
                 else result = 0;
 
             }
