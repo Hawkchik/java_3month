@@ -11,7 +11,7 @@ public class Start {
         Operations operations = new Operations();
         Scanner scanner2 = new Scanner(fr);
         int k = 0;
-        fw.write("Загрузка из файла...");
+        fw.write("Загрузка из файла..." + "\n");
         while (scanner2.hasNextLine()) {
             String line1 = scanner2.nextLine();
             String[] params = line1.split(" ");
@@ -20,14 +20,14 @@ public class Start {
             Transactions transactions1 = new Transactions(price, k++, count);
             if (params[2].equals("buy")) {
                 operations.buy(transactions1);
-                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count);
+                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count + "\n");
                 int a = operations.removeBuy();
                 fw.write("Количество потраченных денег " + a);
             } else if (params[2].equals("sell")) {
                 operations.sell(transactions1);
-                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count);
+                fw.write("Создана транзакция с параметрами: " + "Цена: " + price + "Количество акций " + count + "\n");
                 int b = operations.removeSell();
-                fw.write("Количество потраченных денег " + b);
+                fw.write("Количество потраченных денег " + b + "\n");
 
             }
         }
@@ -45,6 +45,7 @@ public class Start {
         String investorenter = scanner.nextLine();
         int investor = 0;
         Integer capital = 0;
+
         if (operations.number(investorenter)) {
             investor = Integer.parseInt(investorenter);
         } else {
@@ -76,8 +77,11 @@ public class Start {
         Integer i = 0; // счетчик очереди
 
         while (capital > (amount)) {
-            System.out.println("Введите цену акции");
+            System.out.println("Введите цену акции" + " или завершить программу(Введите End)");
             String priceenter = scanner.nextLine();
+            if (priceenter.toUpperCase().equals("END")){
+                break;
+            }
             fw.write("Введена цена: " + priceenter + "\n");
             int price = 0;
             if (operations.number(priceenter)) {
